@@ -1,0 +1,10 @@
+AllCops:
+  TargetRubyVersion: 2.3
+  DisplayCopNames: true
+  DisplayStyleGuide: true
+Style/Alias:
+  # Prefer `alias_method :foo, :bar` over `alias foo bar`
+  EnforcedStyle: prefer_alias_method
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*_spec.rb
