@@ -21,22 +21,26 @@ RSpec.describe Lamassu::PolicyContainer do
   end
 
   describe '#check' do
-    before do
-      container.check :check, (proc { true })
-    end
+    let(:policy_object) { proc { true } }
+    before { container.check :check, policy_object }
 
-    it 'wraps a proc with the check adapter' do
-      expect(container.resolve(:check)).to be_a Lamassu::PolicyAdapters::Check
+    subject { container.resolve(:check) }
+
+    it { is_expected.to be_a Lamassu::PolicyAdapters::Check }
+    it 'should wrap the proc in `#policy`' do
+      is_expected.to have_attributes policy: an_instance_of(Proc)
     end
   end
 
   describe '#map' do
-    before do
-      container.map :map, (proc { 42 })
-    end
+    let(:policy_object) { proc { 42 } }
+    before { container.map :map, policy_object }
 
-    it 'wraps a proc with the map adapter' do
-      expect(container.resolve(:map)).to be_a Lamassu::PolicyAdapters::Map
+    subject { container.resolve(:map) }
+
+    it { is_expected.to be_a Lamassu::PolicyAdapters::Map }
+    it 'should wrap the proc in `#policy`' do
+      is_expected.to have_attributes policy: an_instance_of(Proc)
     end
   end
 

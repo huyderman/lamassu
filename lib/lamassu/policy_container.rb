@@ -19,7 +19,7 @@ module Lamassu
       container.instance_eval(&block)
 
       namespace = case klazz
-                  when Module, Class
+                  when Module
                     Dry::Inflector.new.underscore(klazz)
                   else
                     klazz.to_s

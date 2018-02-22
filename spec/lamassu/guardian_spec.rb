@@ -9,11 +9,21 @@ RSpec.describe Lamassu::Guardian do
   Article = Struct.new(:author, :published)
   User    = Struct.new(:id)
 
+  class ReadPolicy
+    include Lamassu::Policy
+
+    def call(subject:, target:, **_)
+      if target.published || target.author == subject.id
+        Success(:allowed)
+      else
+        Failure(:disallowed)
+      end
+    end
+  end
+
   before do
     guardian.policies.for Article do
-      check :read, (lambda do |subject:, target:|
-        target.published || target.author == subject.id
-      end)
+      policy :read, ReadPolicy.new
       check :update, ->(subject:, target:) { target.author == subject.id }
       check :list, ->(**_) { true }
     end
@@ -30,6 +40,15 @@ RSpec.describe Lamassu::Guardian do
 
           it { is_expected.to be_a Dry::Monads::Result::Success }
         end
+
+        it 'resolves to success in block' do
+          result = nil
+          guardian.authorize user, article, :read do |r|
+            r.success { result = :success }
+            r.failure { result = :failure }
+          end
+          expect(result).to eq :success
+        end
       end
 
       context 'and unauthorized subject' do
@@ -40,6 +59,15 @@ RSpec.describe Lamassu::Guardian do
           subject { guardian.authorize user, article, :read }
 
           it { is_expected.to be_a Dry::Monads::Result::Failure }
+        end
+
+        it 'resolves to failure in block' do
+          result = nil
+          guardian.authorize user, article, :read do |r|
+            r.success { result = :success }
+            r.failure { result = :failure }
+          end
+          expect(result).to eq :failure
         end
       end
 

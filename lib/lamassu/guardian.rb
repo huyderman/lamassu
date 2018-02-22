@@ -8,11 +8,10 @@ module Lamassu
   class Guardian
     include Dry::Monads::Result::Mixin
 
-    attr_reader :container, :inflector
+    attr_reader :container
 
-    def initialize(container: nil, inflector: nil, **_)
-      @container = container || PolicyContainer.new
-      @inflector = inflector || Dry::Inflector.new
+    def initialize(container: PolicyContainer.new, **_)
+      @container = container
     end
 
     alias_method :policies, :container
@@ -46,8 +45,9 @@ module Lamassu
     # :reek:FeatureEnvy
     # @param [Object,Module] target
     def target_namespace(target)
+      inflector = Dry::Inflector.new
       case target
-      when Module, Class
+      when Module
         inflector.underscore(target)
       when String, Symbol
         target
