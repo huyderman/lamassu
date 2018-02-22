@@ -9,12 +9,14 @@ module Lamassu
     # Policy Adapter for a callable wrapping returned value to Success on true
     # and Failure on false
     class Check
-      extend Dry::Initializer
-
       include Dry::Monads::Result::Mixin
       include Dry::Matcher.for(:call, with: Dry::Matcher::ResultMatcher)
 
-      param :policy
+      attr_reader :policy
+
+      def initialize(policy)
+        @policy = policy
+      end
 
       def call(*args)
         value = policy.call(*args)

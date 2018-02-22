@@ -1,17 +1,19 @@
 # frozen_string_literal: true
 
-require 'dry-initializer'
 require 'dry/inflector'
 require 'lamassu/policy_container'
 
 module Lamassu
   # Guardian object for authorizing a subject
   class Guardian
-    extend Dry::Initializer
     include Dry::Monads::Result::Mixin
 
-    option :container, default: proc { PolicyContainer.new }
-    option :inflector, default: proc { Dry::Inflector.new }
+    attr_reader :container, :inflector
+
+    def initialize(container: nil, inflector: nil, **_)
+      @container = container || PolicyContainer.new
+      @inflector = inflector || Dry::Inflector.new
+    end
 
     alias_method :policies, :container
 

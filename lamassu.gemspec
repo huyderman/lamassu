@@ -22,7 +22,6 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency 'dry-container', '~> 0.6.0'
   spec.add_runtime_dependency 'dry-inflector', '~> 0.1.1'
-  spec.add_runtime_dependency 'dry-initializer', '~> 2.3.0'
   spec.add_runtime_dependency 'dry-matcher', '~> 0.7.0'
   spec.add_runtime_dependency 'dry-monads', '~> 0.4.0'
 

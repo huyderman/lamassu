@@ -8,12 +8,14 @@ module Lamassu
   module PolicyAdapters
     # Policy Adapter for a callable wrapping returned value to Success
     class Map
-      extend Dry::Initializer
-
       include Dry::Monads::Result::Mixin
       include Dry::Matcher.for(:call, with: Dry::Matcher::ResultMatcher)
 
-      param :policy
+      attr_reader :policy
+
+      def initialize(policy)
+        @policy = policy
+      end
 
       def call(*args)
         value = policy.call(*args)
