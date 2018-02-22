@@ -46,9 +46,14 @@ module Lamassu
     # :reek:FeatureEnvy
     # @param [Object,Module] target
     def target_namespace(target)
-      const = target.is_a?(Module) ? target : target.class
-
-      inflector.underscore(const)
+      case target
+      when Module, Class
+        inflector.underscore(target)
+      when String, Symbol
+        target
+      else
+        inflector.underscore(target.class)
+      end
     end
   end
 end

@@ -4,6 +4,8 @@ require 'dry/monads/result'
 require 'lamassu/policy_container'
 
 RSpec.describe Lamassu::PolicyContainer do
+  class MyClass; end
+
   let(:container) { described_class.new }
 
   let(:my_policy) { ->(**_) { Dry::Monads::Result::Success.new(true) } }
@@ -39,16 +41,25 @@ RSpec.describe Lamassu::PolicyContainer do
   end
 
   describe '#for' do
-    context 'with String as namespace' do
+    context 'with class as namespace' do
       before do
         pol = my_policy
-        container.for(String) do
-          policy :read, pol
-        end
+        container.for(MyClass) { policy :read, pol }
       end
 
-      it 'registers policy with `string` as namespace' do
-        expect(container.resolve('string.read')).to eq my_policy
+      it 'registers policy with underscored name as namespace' do
+        expect(container.resolve('my_class.read')).to eq my_policy
+      end
+    end
+
+    context 'with string as namespace' do
+      before do
+        pol = my_policy
+        container.for('foo') { policy :read, pol }
+      end
+
+      it 'registers policy with underscored name as namespace' do
+        expect(container.resolve('foo.read')).to eq my_policy
       end
     end
   end

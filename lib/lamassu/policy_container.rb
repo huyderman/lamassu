@@ -18,7 +18,13 @@ module Lamassu
       container = PolicyContainer.new
       container.instance_eval(&block)
 
-      merge(container, namespace: Dry::Inflector.new.underscore(klazz))
+      namespace = case klazz
+                  when Module, Class
+                    Dry::Inflector.new.underscore(klazz)
+                  else
+                    klazz.to_s
+                  end
+      merge(container, namespace: namespace)
     end
 
     alias_method :policy, :register

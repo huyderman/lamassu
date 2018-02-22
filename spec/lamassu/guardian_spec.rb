@@ -74,13 +74,37 @@ RSpec.describe Lamassu::Guardian do
       end
     end
 
+    context 'with string target' do
+      context 'and authorized subject' do
+        let(:user) { User.new(:bob) }
+
+        context 'the result' do
+          subject { guardian.authorize user, 'article', :list }
+
+          it { is_expected.to be_a Dry::Monads::Result::Success }
+        end
+      end
+    end
+
+    context 'with symbol target' do
+      context 'and authorized subject' do
+        let(:user) { User.new(:bob) }
+
+        context 'the result' do
+          subject { guardian.authorize user, :article, :list }
+
+          it { is_expected.to be_a Dry::Monads::Result::Success }
+        end
+      end
+    end
+
     context 'with invalid context' do
       let(:article) { Article.new(:bob, true) }
       let(:user) { User.new(:bob) }
 
       it do
         expect { guardian.authorize user, :foo, :read }
-          .to raise_error
+          .to raise_error 'Nothing registered with the key "foo.read"'
       end
     end
   end
