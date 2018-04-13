@@ -7,4 +7,5 @@ Style/Alias:
   EnforcedStyle: prefer_alias_method
 Metrics/BlockLength:
   Exclude:
+    - lamassu.gemspec
     - spec/**/*_spec.rb
