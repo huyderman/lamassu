@@ -7,13 +7,11 @@ Gem::Specification.new do |spec|
   spec.name    = 'lamassu'
   spec.version = version
   spec.authors = ['Jo-Herman Haugholt']
-  spec.email   = ['jo-herman@sonans.no']
+  spec.email   = ['johannes@huyderman.com']
 
   spec.summary  = 'Autorization gem based on policy objects and dry-container'
-  spec.homepage = 'https://github.com/Sonans/lamassu'
+  spec.homepage = 'https://github.com/huyderman/lamassu'
   spec.license  = 'MIT'
-
-  spec.metadata['allowed_push_host'] = 'https://gem.fury.io'
 
   spec.files = `git ls-files -z`.split("\x0").reject do |f|
     f.match(%r{^(test|spec|features)/})
