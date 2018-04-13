@@ -4,7 +4,7 @@
 [![Build Status](https://travis-ci.org/huyderman/lamassu.svg?branch=master)](https://travis-ci.org/huyderman/lamassu)
 [![Maintainability](...)](https://codeclimate.com/github/huyderman/lamassu/maintainability)
 [![Test Coverage](...)](https://codeclimate.com/github/huyderman/lamassu/test_coverage)
-[![Join the chat at https://gitter.im/lamassu/Lobby](https://badges.gitter.im/lamassu/Lobby.svg)](https://gitter.im/lamassu/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Join the chat at https://gitter.im/lamassu-rb/Lobby](https://badges.gitter.im/lamassu-rb/Lobby.svg)](https://gitter.im/lamassu-rb/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 > Lamassu is an functional authorization framework for Ruby, based on
 > callable policy objects and policy containers
