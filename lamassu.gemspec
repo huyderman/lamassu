@@ -26,9 +26,9 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'bundler', '~> 1.16'
   spec.add_development_dependency 'mutant', '~> 0.8.0'
   spec.add_development_dependency 'mutant-rspec', '~> 0.8.0'
-  spec.add_development_dependency 'rake', '~> 10.0'
-  spec.add_development_dependency 'reek', '~> 4.7.3'
+  spec.add_development_dependency 'rake', '~> 12.0'
+  spec.add_development_dependency 'reek', '~> 4.7'
   spec.add_development_dependency 'rspec', '~> 3.0'
-  spec.add_development_dependency 'rubocop', '~> 0.52.0'
+  spec.add_development_dependency 'rubocop', '~> 0.52'
   spec.add_development_dependency 'simplecov', '~> 0.16'
 end
