@@ -2,8 +2,8 @@
 
 [![Gem Version](https://badge.fury.io/rb/lamassu.svg)](https://badge.fury.io/rb/querylicious)
 [![Build Status](https://travis-ci.org/huyderman/lamassu.svg?branch=master)](https://travis-ci.org/huyderman/lamassu)
-[![Maintainability](...)](https://codeclimate.com/github/huyderman/lamassu/maintainability)
-[![Test Coverage](...)](https://codeclimate.com/github/huyderman/lamassu/test_coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/7c9101722d70997c9d14/maintainability)](https://codeclimate.com/github/huyderman/lamassu/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/7c9101722d70997c9d14/test_coverage)](https://codeclimate.com/github/huyderman/lamassu/test_coverage)
 [![Join the chat at https://gitter.im/lamassu-rb/Lobby](https://badges.gitter.im/lamassu-rb/Lobby.svg)](https://gitter.im/lamassu-rb/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 > Lamassu is an functional authorization framework for Ruby, based on
