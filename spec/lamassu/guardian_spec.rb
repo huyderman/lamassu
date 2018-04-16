@@ -86,7 +86,9 @@ RSpec.describe Lamassu::Guardian do
         end
 
         context 'the result for user failing one policy' do
-          subject { guardian.authorize unauthorized_user, article, :read, :update }
+          subject do
+            guardian.authorize unauthorized_user, article, :update, :list
+          end
 
           it { is_expected.to be_a Dry::Monads::Result::Failure }
         end
