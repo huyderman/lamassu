@@ -33,9 +33,13 @@ module Lamassu
 
       policies.reduce(Success(nil)) do |result, action|
         result.bind do
-          container
-            .resolve("#{namespace}.#{action}")
-            .call(subject, target, **opts, &block)
+          policy = container.resolve("#{namespace}.#{action}")
+
+          if opts.empty?
+            policy.call(subject, target, &block)
+          else
+            policy.call(subject, target, **opts, &block)
+          end
         end
       end
     end
