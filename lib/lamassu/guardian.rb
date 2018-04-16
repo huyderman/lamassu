@@ -35,7 +35,7 @@ module Lamassu
         result.bind do
           container
             .resolve("#{namespace}.#{action}")
-            .call(subject: subject, target: target, **opts, &block)
+            .call(subject, target, **opts, &block)
         end
       end
     end

@@ -12,7 +12,7 @@ RSpec.describe Lamassu::Guardian do
   class ReadPolicy
     include Lamassu::Policy
 
-    def call(subject:, target:, **_)
+    def call(subject, target, **_)
       if target.published || target.author == subject.id
         Success(:allowed)
       else
@@ -24,8 +24,8 @@ RSpec.describe Lamassu::Guardian do
   before do
     guardian.policies.for Article do
       policy :read, ReadPolicy.new
-      check :update, ->(subject:, target:) { target.author == subject.id }
-      check :list, ->(**_) { true }
+      check :update, ->(subject, target, **_) { target.author == subject.id }
+      check :list, (proc { true })
     end
   end
 

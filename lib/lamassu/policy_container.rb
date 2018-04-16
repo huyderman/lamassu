@@ -27,18 +27,22 @@ module Lamassu
       merge(container, namespace: namespace)
     end
 
-    alias_method :policy, :register
+    # @param [String,Symbol] key
+    # @param [#call] policy_object
+    def policy(key, policy_object)
+      register(key, policy_object, call: false)
+    end
 
     # @param [String,Symbol] key
     # @param [#call] policy_object
     def check(key, policy_object)
-      register(key, PolicyAdapters::Check.new(policy_object))
+      register(key, PolicyAdapters::Check.new(policy_object), call: false)
     end
 
     # @param [String,Symbol] key
     # @param [#call] policy_object
     def map(key, policy_object)
-      register(key, PolicyAdapters::Map.new(policy_object))
+      register(key, PolicyAdapters::Map.new(policy_object), call: false)
     end
   end
 end

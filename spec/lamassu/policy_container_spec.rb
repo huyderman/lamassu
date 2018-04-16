@@ -8,7 +8,7 @@ RSpec.describe Lamassu::PolicyContainer do
 
   let(:container) { described_class.new }
 
-  let(:my_policy) { ->(**_) { Dry::Monads::Result::Success.new(true) } }
+  let(:my_policy) { proc { Dry::Monads::Result::Success.new(true) } }
 
   describe '#policy' do
     before do
