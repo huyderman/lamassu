@@ -25,21 +25,15 @@ module Lamassu
     # @param [Object] subject Subject for authorization check
     # @param [Object,Module] target Target for authorization check
     # @param [Symbol,String] policies Policy or policies to check
-    # @param [Hash] opts Additional options passed to policy object
     # @param [Proc] block
     # @return [Dry::Result]
-    def authorize(subject, target, *policies, **opts, &block)
+    def authorize(subject, target, *policies, &block)
       namespace = target_namespace(target)
 
       policies.reduce(Success(nil)) do |result, action|
         result.bind do
-          policy = container.resolve("#{namespace}.#{action}")
-
-          if opts.empty?
-            policy.call(subject, target, &block)
-          else
-            policy.call(subject, target, **opts, &block)
-          end
+          container.resolve("#{namespace}.#{action}")
+                   .call(subject, target, &block)
         end
       end
     end
