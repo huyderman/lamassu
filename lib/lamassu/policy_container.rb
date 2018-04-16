@@ -36,13 +36,13 @@ module Lamassu
     # @param [String,Symbol] key
     # @param [#call] policy_object
     def check(key, policy_object)
-      register(key, PolicyAdapters::Check.new(policy_object), call: false)
+      policy(key, PolicyAdapters::Check.new(policy_object))
     end
 
     # @param [String,Symbol] key
     # @param [#call] policy_object
     def map(key, policy_object)
-      register(key, PolicyAdapters::Map.new(policy_object), call: false)
+      policy(key, PolicyAdapters::Map.new(policy_object))
     end
   end
 end
