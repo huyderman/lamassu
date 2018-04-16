@@ -11,18 +11,18 @@ module Lamassu
     include Dry::Container::Mixin
     include Dry::Monads::Result::Mixin
 
-    # @param [Module] klazz
+    # @param [Module] scope
     # @param [Proc] block
     # @return [PolicyContainer]
-    def for(klazz, &block)
+    def for(scope, &block)
       container = PolicyContainer.new
       container.instance_eval(&block)
 
-      namespace = case klazz
+      namespace = case scope
                   when Module
-                    Dry::Inflector.new.underscore(klazz)
+                    Dry::Inflector.new.underscore(scope)
                   else
-                    klazz.to_s
+                    scope
                   end
       merge(container, namespace: namespace)
     end

@@ -54,6 +54,12 @@ RSpec.describe Lamassu::PolicyContainer do
       it 'registers policy with underscored name as namespace' do
         expect(container.resolve('my_class.read')).to eq my_policy
       end
+      it do
+        expect { container.resolve('read') }.to(
+          raise_error(Dry::Container::Error,
+                      'Nothing registered with the key "read"')
+        )
+      end
     end
 
     context 'with string as namespace' do
