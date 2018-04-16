@@ -9,21 +9,24 @@ RSpec.describe Lamassu::Guardian do
   Article = Struct.new(:author, :published)
   User    = Struct.new(:id)
 
-  class ReadPolicy
-    include Lamassu::Policy
+  let(:read_policy_class) do
+    Class.new do
+      include Lamassu::Policy
 
-    def call(subject, target)
-      if target.published || target.author == subject.id
-        Success(:allowed)
-      else
-        Failure(:disallowed)
+      def call(subject, target)
+        if target.published || target.author == subject.id
+          Success(:allowed)
+        else
+          Failure(:disallowed)
+        end
       end
     end
   end
 
   before do
+    read_policy = read_policy_class.new
     guardian.policies.for Article do
-      policy :read, ReadPolicy.new
+      policy :read, read_policy
       check :update, ->(subject, target) { target.author == subject.id }
       check :list, (proc { true })
     end
